@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo apt update
+sudo apt install python3-venv
 
 # Set the environment name
 ENV_DIR="venv"
