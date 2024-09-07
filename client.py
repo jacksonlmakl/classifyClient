@@ -7,7 +7,7 @@ class Connect:
 
     def table(self,db,schema,tbl):
         # Define the API endpoint and query parameters
-        url = 'http://localhost:5555/get_table'
+        url = 'http://54.166.184.183:5555/get_table'
         params = {
             'email': self.email,
             'password': self.password,
