@@ -1,5 +1,6 @@
+pandas==2.2.2
+numpy==1.26.4
 openai==1.43.1
 SQLAlchemy==2.0.32
 psycopg2-binary==2.9.9
-pandas==2.1.0
-Flask==3.0.0
+Flask==3.0.3
