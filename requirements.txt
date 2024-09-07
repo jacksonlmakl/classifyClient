@@ -1,5 +1,5 @@
 pandas==2.0.2
-numpy==1.26.4
+numpy==1.24.4
 openai==1.43.1
 SQLAlchemy==2.0.32
 psycopg2-binary==2.9.9
