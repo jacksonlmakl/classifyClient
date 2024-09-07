@@ -1,4 +1,4 @@
-Traceback (most recent call last):
-  File "/Users/jackson.makl@dataiku.com/DP_APP/app.py", line 1, in <module>
-    from flask import Flask, request, jsonify
-ModuleNotFoundError: No module named 'flask'
+ * Serving Flask app 'app'
+ * Debug mode: on
+Address already in use
+Port 5555 is in use by another program. Either identify and stop that program, or start the server with a different port.
