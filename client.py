@@ -19,7 +19,6 @@ class Connect:
         
         # Make the GET request
         response = requests.get(url, params=params)
-        
         # Check if the request was successful
         if response.status_code == 200:
             # Parse the JSON response
