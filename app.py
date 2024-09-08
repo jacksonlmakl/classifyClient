@@ -65,7 +65,7 @@ def update_settings():
 @app.route('/create_user', methods=['GET'])
 def create_user():
     email = request.args.get('email')
-    password = request.args.get('password')
+    pwd = request.args.get('password')
     invite_code = request.args.get('invite_code')
     
     result=createUser(email, pwd, invite_code)
