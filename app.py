@@ -69,8 +69,9 @@ def create_user():
     invite_code = request.args.get('invite_code')
     
     result=createUser(email, pwd, invite_code)
-    return jsonify({
-        "success": str(result)})
+    if result:
+        return jsonify({
+            "success": True})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",debug=True,port=5555)
