@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import math
 from apiClient import apiClient
+import json
 app = Flask(__name__)
 
 @app.route('/get_table', methods=['GET'])
@@ -40,6 +41,24 @@ def get_table():
             "records_per_page": per_page
         }
     })
+
+
+
+
+
+@app.route('/update_settings', methods=['GET'])
+def update_settings():
+    email = request.args.get('email')
+    password = request.args.get('password')
+    
+    param_type = request.args.get('param_type')
+    data = request.args.get('data')
+    print("LOOK: ", email, password)
+    client=apiClient(email, password)
+
+    result = client.update_admin_settings(param_type,json.loads(data))
+    return jsonify({
+        "success": result})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",debug=True,port=5555)
