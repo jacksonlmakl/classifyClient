@@ -26,8 +26,10 @@ def sql(query):
         keys=list(r.keys())
         rows=r.all()
         data=[dict(zip(keys,i)) for i in rows]
+        conn.close()
         return pd.DataFrame(data)
     else:
+        conn.close()
         return r
 
 
