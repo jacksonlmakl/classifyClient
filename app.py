@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import math
 from apiClient import apiClient
 import json
+from createUser import createUser
 app = Flask(__name__)
 
 @app.route('/get_table', methods=['GET'])
@@ -59,6 +60,17 @@ def update_settings():
     result = client.update_admin_settings(param_type,json.loads(data))
     return jsonify({
         "success": result})
+
+
+@app.route('/create_user', methods=['GET'])
+def create_user():
+    email = request.args.get('email')
+    password = request.args.get('password')
+    invite_code = request.args.get('invite_code')
+    
+    result=createUser(email, pwd, invite_code)
+    return jsonify({
+        "success": str(result)})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",debug=True,port=5555)

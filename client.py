@@ -50,3 +50,22 @@ class Connect:
         else:
             return response
             print(f"Error: {response.status_code}, {response.text}")
+
+    def create_user(self,email,password,invite_code):
+        # Define the API endpoint and query parameters
+        url = 'http://54.166.184.183:5555/create_user'
+        params = {
+            'email': email,
+            'password': password,
+            'invite_code': invite_code,
+        }
+        # Make the GET request
+        response = requests.get(url, params=params)
+        # Check if the request was successful
+        if response.status_code == 200:
+            # Parse the JSON response
+            data = response.json()
+            return data
+        else:
+            return response
+            print(f"Error: {response.status_code}, {response.text}")

@@ -12,13 +12,22 @@ def createUser(email, pwd, invite_code):
 
     q=f""" SELECT "ID" AS "ID" FROM "USERS"."ACCOUNTS" WHERE "INVITE_CODE"='{invite_code}' """
     account_id=list(sql(q)["ID"])[0] if len(list(sql(q)["ID"])) >0 else None
-    
-    insert_q=f"""
-    BEGIN;
-    INSERT INTO "USERS"."AUTH"(
-    	"ID", "EMAIL", "PASSWORD", "TOKEN", "ACCOUNT_ID")
-    	VALUES ('{user_id}', '{email}', '{pwd}', '{token}', '{account_id}');
-    COMMIT;
-    """
-    sql(insert_q)
+
+    if not account_id:
+        return "Invalid Invite Code"
+
+    q2=f""" SELECT "EMAIL" AS "EMAIL" FROM "USERS"."AUTH" """
+    emails=list(sql(q2)["EMAIL"])
+    if email in emails:
+        return "Email already exists"
+
+    else:
+        insert_q=f"""
+        BEGIN;
+        INSERT INTO "USERS"."AUTH"(
+        	"ID", "EMAIL", "PASSWORD", "TOKEN", "ACCOUNT_ID")
+        	VALUES ('{user_id}', '{email}', '{pwd}', '{token}', '{account_id}');
+        COMMIT;
+        """
+        sql(insert_q)
     return token
