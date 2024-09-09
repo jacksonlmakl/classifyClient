@@ -38,7 +38,7 @@ class Account:
         elif key == 'SECRETS':
             return sql(f"""
             BEGIN;
-        UPDATE "USERS"."SECRETS"
+        UPDATE "USERS"."ACCOUNTS"
         	SET "SECRETS_DATA"='{json.dumps(data)}'
         	WHERE "ID" = '{self.account_id}';
         COMMIT;
