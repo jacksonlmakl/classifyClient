@@ -105,7 +105,7 @@ def get_settings():
     df_account = sql(acc_query)
     try:
         account_admin_user_id=df_account['ADMIN_AUTH_ID'][0]
-    else:
+    except:
         account_admin_user_id=None
         
     if user_id != account_admin_user_id:
