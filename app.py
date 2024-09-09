@@ -98,7 +98,7 @@ def get_settings():
     "POLICIES_DATA" AS "POLICIES",
     "USERS_DATA" AS "USERS",
     "INVITE_CODE" AS "INVITE_CODE",
-    "SECRETS_DATA" AS "SECRETS",
+    "SECRETS_DATA" AS "SECRETS"
     FROM "USERS"."ACCOUNTS"
     WHERE "ID" = '{account_id}'
     """
