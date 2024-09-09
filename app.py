@@ -100,7 +100,7 @@ def get_settings():
     "INVITE_CODE" AS "INVITE_CODE",
     "SECRETS_DATA" AS "SECRETS",
     FROM "USERS"."ACCOUNTS"
-    WHERE "EMAIL" = '{email}' AND "PASSWORD" = '{pwd}'
+    WHERE "ID" = '{account_id}'
     """
     df_account = sql(acc_query)
     try:
