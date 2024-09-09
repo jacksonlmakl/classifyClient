@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import math
 from apiClient import apiClient
 import json
+from appPostgres import sql
 from createUser import createUser
 app = Flask(__name__)
 
@@ -72,6 +73,50 @@ def create_user():
     if result:
         return jsonify({
             "success": True})
+
+
+
+@app.route('/get_settings', methods=['GET'])
+def get_settings():
+    email = request.args.get('email')
+    pwd = request.args.get('password')
+    query= f""" 
+    SELECT "ID","EMAIL","ACCOUNT_ID"
+    FROM "USERS"."AUTH"
+    WHERE "EMAIL" = '{email}' AND "PASSWORD" = '{pwd}'
+    """
+    df_user = sql(query)
+
+    account_id=df_user['ACCOUNT_ID'][0]
+    user_id=df_user['ID'][0]
+    
+    acc_query= f""" 
+    SELECT 
+    "ID",
+    "NAME",
+    "ADMIN_AUTH_ID",
+    "POLICIES_DATA" AS "POLICIES",
+    "USERS_DATA" AS "USERS",
+    "INVITE_CODE" AS "INVITE_CODE",
+    "SECRETS_DATA" AS "SECRETS",
+    FROM "USERS"."ACCOUNTS"
+    WHERE "EMAIL" = '{email}' AND "PASSWORD" = '{pwd}'
+    """
+    df_account = sql(acc_query)
+    try:
+        account_admin_user_id=df_account['ADMIN_AUTH_ID'][0]
+    else:
+        account_admin_user_id=None
+        
+    if user_id != account_admin_user_id:
+        del df_account['INVITE_CODE']
+        del df_account['SECRETS']
+    user_data = df_user.to_dict(orient='records')
+    account_data = df_account.to_dict(orient='records')
+    if result:
+        return jsonify({
+            "user_settings": user_data,
+            "account_settings": account_data })
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",debug=True,port=5555)
