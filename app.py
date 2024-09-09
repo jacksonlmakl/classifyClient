@@ -113,10 +113,9 @@ def get_settings():
         del df_account['SECRETS']
     user_data = df_user.to_dict(orient='records')
     account_data = df_account.to_dict(orient='records')
-    if result:
-        return jsonify({
-            "user_settings": user_data,
-            "account_settings": account_data })
+    return jsonify({
+        "user_settings": user_data,
+        "account_settings": account_data })
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",debug=True,port=5555)
