@@ -5,7 +5,7 @@ from CORE.getPolicies import getPolicy
 
 def maskData(data,allowed_tags,tags=None,secrets_json={}):
     if "*" in allowed_tags:
-        return new_df=pd.DataFrame(data)
+        return pd.DataFrame(data)
     if not tags:
         tags=autoClassify(data, secrets_json)
     if type(data)!=pd.DataFrame:
