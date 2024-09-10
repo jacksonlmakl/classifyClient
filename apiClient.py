@@ -43,6 +43,9 @@ class apiClient:
     def table(self,database_name,schema_name,table_name):
         df = self.client.table(database_name,schema_name,table_name, self.policies_json, self.users_json, self.secrets_json)
         return df
+    def query(self,query):
+        df = self.client.query(query, self.policies_json, self.users_json, self.secrets_json)
+        return df
     def update_admin_settings(self,param_type,data):
         if self.account_id:
             a=Account(self.email,self.password,self.account_id,self)
