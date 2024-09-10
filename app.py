@@ -135,7 +135,7 @@ def query():
 
     # Initialize the apiClient and fetch the table
     c = apiClient(email, password)
-    df = c.query(db, schema, tbl)
+    df = c.query(query)
 
     # Paginate if necessary
     total_records = len(df)
